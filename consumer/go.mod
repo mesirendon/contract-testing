@@ -3,6 +3,7 @@ module github.com/mesirendon/contract-testing/consumer
 go 1.23.5
 
 require (
+	github.com/google/uuid v1.6.0
 	github.com/pact-foundation/pact-go/v2 v2.1.0
 	github.com/stretchr/testify v1.10.0
 )
@@ -12,6 +13,7 @@ require (
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/stretchr/objx v0.5.2 // indirect
 	golang.org/x/net v0.33.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect

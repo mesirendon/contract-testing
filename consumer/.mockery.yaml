@@ -1,0 +1,13 @@
+disable-version-string: True
+with-expecter: True
+packages:
+  github.com/mesirendon/contract-testing/consumer/internal/usecase:
+    config:
+      all: True
+      inpackage: True
+      outpkg: "{{.PackageName}}"
+      dir: "{{.InterfaceDir}}"
+      filename: "mock_{{.InterfaceName | snakecase }}_test.go"
+      mockname: "mock{{ .InterfaceName | camelcase }}"
+      with-expecter: True
+      keeptree: False
