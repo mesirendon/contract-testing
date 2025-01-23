@@ -1,9 +1,13 @@
 {
   "folders": [
-  {
-    "name": "root",
+    {
+      "name": "root",
       "path": "."
-  },
+    },
+    {
+      "name": "consumer",
+      "path": "consumer"
+    }
   ],
   "settings": {
     "editor.formatOnSave": true,
@@ -23,5 +27,7 @@
       "editor.suggest.insertMode": "replace",
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "go.buildTags": "contracts",
+    "go.buildFlags": ["-tags=contracts"]
   }
 }
