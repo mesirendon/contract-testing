@@ -14,7 +14,7 @@ run-consumer:
 	@go run cmd/main.go
 
 unit:
-	@echo "=== 🔨Running Unit tests ==="
+	@echo "=== 🔨 Running Unit tests 🔨 ==="
 	go test ./... -cover -v
 
 consumer: export PACT_TEST := true
