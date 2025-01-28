@@ -2,7 +2,7 @@ resolve-type-alias: False
 issue-845-fix: True
 with-expecter: True
 packages:
-  github.com/mesirendon/contract-testing/consumer/internal/usecase:
+  github.com/mesirendon/contract-testing/provider/internal/handler:
     config:
       all: True
       inpackage: True

@@ -12,7 +12,9 @@ import (
 	"time"
 
 	"github.com/mesirendon/contract-testing/provider/internal/middleware"
+	"github.com/mesirendon/contract-testing/provider/internal/model"
 	"github.com/pact-foundation/pact-go/v2/log"
+	"github.com/pact-foundation/pact-go/v2/models"
 	"github.com/pact-foundation/pact-go/v2/provider"
 	"github.com/pact-foundation/pact-go/v2/utils"
 )
@@ -22,7 +24,29 @@ const (
 )
 
 var (
-	port, _ = utils.GetFreePort()
+	db map[int]model.User
+
+	userExists = map[int]model.User{
+		10: {
+			FirstName: "John",
+			LastName:  "Doe",
+			Username:  "drwho",
+			Type:      "user",
+			ID:        10,
+		},
+	}
+
+	port, _       = utils.GetFreePort()
+	stateHandlers = models.StateHandlers{
+		"User drwho exists": func(setup bool, state models.ProviderState) (models.ProviderStateResponse, error) {
+			db = userExists
+			return models.ProviderStateResponse{}, nil
+		},
+		"User drwho does not exist": func(setup bool, state models.ProviderState) (models.ProviderStateResponse, error) {
+			db = make(map[int]model.User)
+			return models.ProviderStateResponse{}, nil
+		},
+	}
 )
 
 func TestUserServicePact(t *testing.T) {
@@ -41,6 +65,7 @@ func TestUserServicePact(t *testing.T) {
 		PublishVerificationResults: true,
 		ProviderVersion:            os.Getenv("VERSION_COMMIT"),
 		RequestFilter:              fixBearerToken,
+		StateHandlers:              stateHandlers,
 	})
 
 	if err != nil {
@@ -58,7 +83,7 @@ func fixBearerToken(next http.Handler) http.Handler {
 }
 
 func startInstrumentedUserService() {
-	mux := middleware.GetHTTPHandler()
+	mux := middleware.GetHTTPHandler(&db)
 
 	ln, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {

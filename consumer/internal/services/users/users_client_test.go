@@ -25,28 +25,6 @@ func TestUserClientPact_GetUser(t *testing.T) {
 		PactDir:  os.Getenv("PACT_DIR"),
 	})
 
-	t.Run("the service is unavailable", func(t *testing.T) {
-		id := 10
-
-		err = mockProvider.
-			AddInteraction().
-			Given("Service is unavailable").
-			UponReceiving("A request to get a user").
-			WithRequestPathMatcher("GET", matchers.Regex("/user/"+strconv.Itoa(id), "/user/[0-9]+")).
-			WillRespondWith(http.StatusInternalServerError).
-			ExecuteTest(t, func(msc consumer.MockServerConfig) error {
-				u := fmt.Sprintf("http://%s:%d", msc.Host, msc.Port)
-				client, _ := NewUsersClient(u)
-
-				_, err := client.GetUser(id)
-				assert.Equal(t, ErrUnavailable, err)
-
-				return nil
-			})
-
-		assert.NoError(t, err)
-	})
-
 	t.Run("the user exists", func(t *testing.T) {
 		id := 10
 

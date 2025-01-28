@@ -6,10 +6,19 @@ import (
 	"net/http"
 
 	"github.com/mesirendon/contract-testing/provider/internal/middleware"
+	"github.com/mesirendon/contract-testing/provider/internal/model"
 )
 
 func main() {
-	mux := middleware.GetHTTPHandler()
+	mux := middleware.GetHTTPHandler(&map[int]model.User{
+		10: {
+			FirstName: "John",
+			LastName:  "Doe",
+			Username:  "drwho",
+			Type:      "user",
+			ID:        10,
+		},
+	})
 
 	ln, err := net.Listen("tcp", ":8082")
 	if err != nil {

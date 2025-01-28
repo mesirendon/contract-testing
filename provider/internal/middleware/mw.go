@@ -6,16 +6,17 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/mesirendon/contract-testing/provider/internal/model"
 )
 
 const (
 	timeFormat = "2006-01-02T15:04"
 )
 
-func GetHTTPHandler() *http.ServeMux {
+func GetHTTPHandler(p *map[int]model.User) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	setRoutes(mux)
+	setRoutes(mux, p)
 
 	return mux
 }

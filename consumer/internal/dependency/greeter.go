@@ -9,7 +9,7 @@ import (
 )
 
 func GreeterHandler(w http.ResponseWriter, r *http.Request) {
-	us, err := users.NewUsersClient("http://localhost:8080")
+	us, err := users.NewUsersClient("http://localhost:8082")
 	if err != nil {
 		panic(err)
 	}
