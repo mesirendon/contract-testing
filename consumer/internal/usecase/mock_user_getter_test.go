@@ -76,6 +76,39 @@ func (_c *mockUserGetter_GetUser_Call) RunAndReturn(run func(int) (model.User, e
 	return _c
 }
 
+// SetToken provides a mock function with given fields: token
+func (_m *mockUserGetter) SetToken(token string) {
+	_m.Called(token)
+}
+
+// mockUserGetter_SetToken_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'SetToken'
+type mockUserGetter_SetToken_Call struct {
+	*mock.Call
+}
+
+// SetToken is a helper method to define mock.On call
+//   - token string
+func (_e *mockUserGetter_Expecter) SetToken(token interface{}) *mockUserGetter_SetToken_Call {
+	return &mockUserGetter_SetToken_Call{Call: _e.mock.On("SetToken", token)}
+}
+
+func (_c *mockUserGetter_SetToken_Call) Run(run func(token string)) *mockUserGetter_SetToken_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(string))
+	})
+	return _c
+}
+
+func (_c *mockUserGetter_SetToken_Call) Return() *mockUserGetter_SetToken_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *mockUserGetter_SetToken_Call) RunAndReturn(run func(string)) *mockUserGetter_SetToken_Call {
+	_c.Run(run)
+	return _c
+}
+
 // newMockUserGetter creates a new instance of mockUserGetter. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func newMockUserGetter(t interface {

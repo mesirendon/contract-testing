@@ -93,7 +93,8 @@ func (uc *UsersClient) newRequest(method, path string, body any) (*http.Request,
 		req.Header.Set("Content-Type", "application/json")
 	}
 	if uc.token != "" {
-		req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", uc.token))
+		t := fmt.Sprintf("Bearer %s", uc.token)
+		req.Header.Set("Authorization", t)
 	}
 
 	req.Header.Set("Accept", "application/json")

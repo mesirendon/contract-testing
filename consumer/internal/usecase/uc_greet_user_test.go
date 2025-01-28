@@ -3,6 +3,7 @@ package usecase
 import (
 	"errors"
 	"testing"
+	"time"
 
 	"github.com/mesirendon/contract-testing/consumer/internal/model"
 	"github.com/stretchr/testify/assert"
@@ -27,6 +28,8 @@ func TestGreetUser_GreetUser(t *testing.T) {
 			},
 			wantErr: "fetching user from user service: service error",
 			mocker: func(userService *mockUserGetter) {
+				userService.EXPECT().SetToken("2024-01-27T10:00")
+
 				userService.EXPECT().GetUser(mock.AnythingOfType("int")).
 					Return(model.User{}, errors.New("service error"))
 			},
@@ -38,6 +41,8 @@ func TestGreetUser_GreetUser(t *testing.T) {
 			},
 			want: "Hello John Doe!",
 			mocker: func(userService *mockUserGetter) {
+				userService.EXPECT().SetToken("2024-01-27T10:00")
+
 				userService.EXPECT().GetUser(10).
 					Return(
 						model.User{
@@ -58,6 +63,9 @@ func TestGreetUser_GreetUser(t *testing.T) {
 			tt.mocker(us)
 
 			uc := NewGreetUser(us)
+			uc.now = func() time.Time {
+				return time.Date(2024, time.January, 27, 10, 0, 0, 0, time.UTC)
+			}
 
 			got, err := uc.GreetUser(tt.args.id)
 
