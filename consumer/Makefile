@@ -21,7 +21,7 @@ run-consumer:
 
 unit:
 	@echo "=== 🔨 Running Unit tests 🔨 ==="
-	go test ./... -cover -v
+	go test ./... -v
 
 consumer: export PACT_TEST := true
 consumer:
@@ -36,7 +36,7 @@ publish:
 	@echo "Pact contract publishing complete!"
 	@echo
 	@echo "Head over to $(PACT_BROKER_PROTO)://$(PACT_BROKER_URL) and login with $(PACT_BROKER_USERNAME)/$(PACT_BROKER_PASSWORD)"
-	@echo "to see your published contracts.	
+	@echo "to see your published contracts."
 
 check-consumer-deploy:
 	@echo "=== 🔬 Checking if we can deploy consumer 🔬 ==="

@@ -11,6 +11,10 @@
     {
       "name": "consumer",
       "path": "consumer"
+    },
+    {
+      "name": "provider",
+      "path": "provider"
     }
   ],
   "settings": {
