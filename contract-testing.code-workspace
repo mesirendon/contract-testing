@@ -5,6 +5,10 @@
       "path": "."
     },
     {
+      "name": "broker",
+      "path": "broker"
+    },
+    {
       "name": "consumer",
       "path": "consumer"
     }
